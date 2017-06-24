@@ -1,4 +1,4 @@
-from .common import *
+from .common import *  # noqa
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -15,6 +15,6 @@ ALLOWED_HOSTS = ['*']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR.child('db.sqlite3'),
+        'NAME': BASE_DIR.child('db.sqlite3'),  # noqa
     }
 }

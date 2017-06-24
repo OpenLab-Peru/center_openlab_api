@@ -1,6 +1,6 @@
 import os
 
-from .common import *
+from .common import *  # noqa
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -16,9 +16,9 @@ THIRD_PARTY_APPS_LOCAL = (
     'django_extensions',
 )
 
-INSTALLED_APPS += THIRD_PARTY_APPS_LOCAL
+INSTALLED_APPS += THIRD_PARTY_APPS_LOCAL  # noqa
 
-MIDDLEWARE += (
+MIDDLEWARE += (  # noqa
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
