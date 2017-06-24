@@ -9,10 +9,15 @@ from django.contrib import admin
 
 
 # Local imports
-from .models import Person
+from .models import Person, Document
 
 
 # Register your models here.
 @admin.register(Person)
 class PersonModelAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'sex', 'age')
+    list_display = ('full_name', 'sex', 'age',)
+
+
+@admin.register(Document)
+class DocumentModelAdmin(admin.ModelAdmin):
+    list_display = ('value', 'kind',)

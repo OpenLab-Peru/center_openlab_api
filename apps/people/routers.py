@@ -8,10 +8,11 @@
 
 
 # Local imports
-from .viewsets import PersonModelViewSet
+from .viewsets import PersonModelViewSet, DocumentModelViewSet
 
 
 # Create your routers here.
 router_list = (
-    (r'persons', PersonModelViewSet),
+    (r'document', DocumentModelViewSet),
+    (r'people', PersonModelViewSet),
 )

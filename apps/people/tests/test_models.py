@@ -9,7 +9,7 @@ from django.utils import timezone
 from model_mommy import mommy
 
 # Local imports
-from ..models import Person
+from ..models import Person, Document
 
 
 # Create your model tests here.
@@ -47,3 +47,29 @@ class PersonTestCase(TestCase):
     def tearDown(self):
         self.person_1.delete()
         self.person_2.delete()
+
+
+class DocumentTestCase(TestCase):
+    def setUp(self):
+        self.person_1 = mommy.make(Person, _fill_optional=['born_date', 'sex'])
+        self.person_2 = mommy.make(Person)
+        self.document_1 = mommy.make(Document, person=self.person_1)
+        self.document_2 = mommy.make(Document, person=self.person_2)
+
+    def test_full_name_type_name(self):
+        self.assertEqual(
+            '{} {}, {}'.format(
+                self.document_1.person.last_name_father,
+                self.document_1.person.last_name_mother,
+                self.document_1.person.name), self.document_1.__str__())
+        self.assertEqual(
+            '{} {}, {}'.format(
+                self.document_2.person.last_name_father,
+                self.document_2.person.last_name_mother,
+                self.document_2.person.name), self.document_2.__str__())
+
+    def tearDown(self):
+        self.person_1.delete()
+        self.person_2.delete()
+        self.document_1.delete()
+        self.document_2.delete()
