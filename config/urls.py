@@ -18,16 +18,34 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from rest_framework import routers
+from rest_framework.documentation import include_docs_urls
+
+from apps.people.routers import router_list as people_router
+
+routers_tuples = (people_router,)
+routers_lists = sum([list(router_list) for router_list in routers_tuples], [])
+
+router = routers.DefaultRouter()
+
+for router_list in sorted(routers_lists):
+    router.register(router_list[0], router_list[1])
+
+for router_list in sorted(routers_lists):
+    router.register(router_list[0], router_list[1])
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(
         r'^api-auth/',
-        include('rest_framework.urls', namespace='rest_framework'))
+        include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api/v1/', include(router.urls)),
+    url(r'^docs/', include_docs_urls(title='Documentacion'))
 ]
 
 if settings.DEBUG:
     import debug_toolbar
 
     urlpatterns = [
-        url(r'^__debug__/', include(debug_toolbar.urls)),
-    ] + urlpatterns
+                      url(r'^__debug__/', include(debug_toolbar.urls)),
+                  ] + urlpatterns
